@@ -1,5 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
+//宝箱类，继承自Actor，实现了ISGamePlayInterface接口，用于与玩家交互
 #pragma once
 
 #include "CoreMinimal.h"

@@ -21,8 +21,8 @@ ASItemChest::ASItemChest()
 
 void ASItemChest::Interact_Implementation(APawn* InstigatorPawn)
 {
-	// 相对base进行旋转，参数(pitch, yaw, roll)
-	LidMesh->SetRelativeRotation(FRotator(110.0f, 0.0f, 0.0f));
+	// 相对base进行旋转，参数(pitch, yaw, roll)将宝箱的朝向调整到合适的角度
+	LidMesh->SetRelativeRotation(FRotator(TargetPitch, 0.0f, 0.0f));
 }
 
 // Called when the game starts or when spawned

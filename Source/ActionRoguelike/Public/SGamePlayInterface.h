@@ -13,12 +13,13 @@ class USGamePlayInterface : public UInterface
 	GENERATED_BODY()
 };
 
+
+// 在这个类中添加接口函数。这个类将被继承以实现该接口。
 class ACTIONROGUELIKE_API ISGamePlayInterface
 {
 	GENERATED_BODY()
 
 	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
-// 在这个类中添加接口函数。这个类将被继承以实现该接口。
 public:
 	// 声明一个蓝图可实现的事件函数，用于与其他对象交互
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)

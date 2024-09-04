@@ -35,7 +35,7 @@ void ASExplosiveBarrel::BeginPlay()
 {
 	Super::BeginPlay();
 	
-}
+} 
 
 // Called every frame
 void ASExplosiveBarrel::Tick(float DeltaTime)

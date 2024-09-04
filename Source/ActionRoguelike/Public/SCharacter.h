@@ -10,6 +10,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class USIteractionComponent;
 class UAnimMontage;
+class USAttributeComponent;
 
 UCLASS()
 class ACTIONROGUELIKE_API ASCharacter : public ACharacter
@@ -35,26 +36,48 @@ protected:
 	UAnimMontage* AttackAnim;
 
 	FTimerHandle TimerHandle_PrimaryAttack;
+
+	UPROPERTY(Editanywhere, Category = "Attack")
+	TSubclassOf<AActor> BlackHoleProjectileClass;
+
+
+	void BlackHoleAttack();
+	void BlackHoleAttack_TimeElapsed();
 public:
 	// Sets default values for this character's properties
 	ASCharacter();
 
 protected:
+#pragma region 
+	//移动和相机跟随
 	UPROPERTY(VisibleAnywhere)
 	USpringArmComponent* SpringArmComp;
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* CameraComp;
 
+	void MoveForward(float Value);
+	void MoveRight(float Value);
+#pragma endregion
+
 	UPROPERTY(VisibleAnywhere)
 	USIteractionComponent* InteractionComp;
 
-	void MoveForward(float Value);
-	void MoveRight(float Value);
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	USAttributeComponent* AttributeComp;
 
+	//普通攻击
 	void PrimaryAttack();
+	
 	void PrimaryInteract();
 	
 	void PrimaryAttack_TimeElapsed();
+
+	void SpawnProjectile(TSubclassOf<AActor> ClassToSpawn);
+
+	UFUNCTION()
+	void OnHealthChanged(AActor* InstigatorActor, USAttributeComponent* OwningComp, float NewHealth, float Delta);
+
+	virtual void PostInitializeComponents() override;
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

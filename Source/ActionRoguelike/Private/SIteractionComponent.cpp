@@ -53,16 +53,22 @@ void USIteractionComponent::PrimaryInteract()
 
 	AActor* HitActor = Hit.GetActor();
 	if (HitActor) {
+		// 如果检测到actor不为空，再判断actor有没有实现SurGameplayInterface类
 		if (HitActor->Implements<USGamePlayInterface>()) {
+			// 我们定义的Interact()传入为Pawn类型，因此做类型转换
 			APawn* MyPawn = Cast<APawn>(MyOwner);
+			// 多态，根据传入的HitActor调用相应函数
+			// 第一个参数不能为空，所以外层已经判空；第二个参数是我们自定义的，暂时没有影响，可以不判空
 			ISGamePlayInterface::Execute_Interact(HitActor, MyPawn);
+			// 用于debug，绘制这条碰撞检测的线，绿色
 			DrawDebugLine(GetWorld(), EyeLocation, End, FColor::Green, false, 3);
 		}
-		else
-		{
-		DrawDebugLine(GetWorld(), EyeLocation, End, FColor::Red, false, 2.0f, 0.0f, 2.0f);
-		}
 	}
+	else
+	{
+		DrawDebugLine(GetWorld(), EyeLocation, End, FColor::Red, false, 2.0f, 0.0f, 2.0f);
+	}
+}
 	
 
 //	TArray<FHitResult>Hits;
@@ -90,4 +96,3 @@ void USIteractionComponent::PrimaryInteract()
 //		DrawDebugSphere(GetWorld(), Hit.ImpactPoint, Radius, 32, LineColor, false, 2.0f);
 //	}
 //	DrawDebugLine(GetWorld(), EyeLocation, End, LineColor, false, 2.0f, 0.0f, 2.0f);	
-}
