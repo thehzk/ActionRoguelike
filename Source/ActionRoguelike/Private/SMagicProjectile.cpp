@@ -15,9 +15,9 @@ ASMagicProjectile::ASMagicProjectile()
 	PrimaryActorTick.bCanEverTick = true;
 
 	SphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
-	//SphereComp->SetCollisionObjectType(ECC_WorldDynamic);
-	//SphereComp->SetCollisionResponseToAllChannels(ECR_Ignore);
-	//SphereComp->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
+	SphereComp->SetCollisionObjectType(ECC_WorldDynamic);
+	SphereComp->SetCollisionResponseToAllChannels(ECR_Ignore);
+	SphereComp->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	//SphereComp->SetCollisionProfileName("Projectile");//在项目设置中碰撞新建一个碰撞体，并将其命名为“Projectile”	
 	RootComponent = SphereComp;
 
@@ -40,10 +40,12 @@ void ASMagicProjectile::OnActorOverlap(UPrimitiveComponent* OverlappedComponent,
 {
 	if (OtherActor && OtherActor != GetInstigator())
 	{
+		//获得AttributeComp
 		USAttributeComponent* AttributeComp = Cast<USAttributeComponent>(OtherActor->GetComponentByClass(USAttributeComponent::StaticClass()));
+		// 再次判空，可能碰到的是墙壁、箱子等没有血量的物体
 		if (AttributeComp)
 		{
-			AttributeComp->ApplyHealthChange(-20.0f);
+			AttributeComp->ApplyHealthChange(-2.0f);
 			Destroy();
 		}
 	}

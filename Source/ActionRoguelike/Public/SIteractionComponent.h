@@ -1,5 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
+//互动组件，可以检查周围有哪些物体可以互动
 #pragma once
 
 #include "CoreMinimal.h"

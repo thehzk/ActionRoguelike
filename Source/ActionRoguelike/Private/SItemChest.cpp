@@ -22,6 +22,7 @@ ASItemChest::ASItemChest()
 void ASItemChest::Interact_Implementation(APawn* InstigatorPawn)
 {
 	// 相对base进行旋转，参数(pitch, yaw, roll)将宝箱的朝向调整到合适的角度
+	//SetRelativeRotation函数的作用是设置组件（如Mesh组件）相对于其父组件的旋转
 	LidMesh->SetRelativeRotation(FRotator(TargetPitch, 0.0f, 0.0f));
 }
 
